@@ -900,7 +900,6 @@ export enum HashOp {
   KECCAK = 3,
   RIPEMD160 = 4,
   BITCOIN = 5,
-  SHA512_256 = 6,
 }
 
 export enum LengthOp {

@@ -62,9 +62,11 @@ export function decodeMsgChannelOpenInit(a: Uint8Array): MsgChannelOpenInit {
   return Protobuf.decode<MsgChannelOpenInit>(a, MsgChannelOpenInit.decode);
 }
 
-@unmanaged
 export class MsgChannelOpenInitResponse {
-  static encode(message: MsgChannelOpenInitResponse, writer: Writer): void {}
+  static encode(message: MsgChannelOpenInitResponse, writer: Writer): void {
+    writer.uint32(10);
+    writer.string(message.channel_id);
+  }
 
   static decode(reader: Reader, length: i32): MsgChannelOpenInitResponse {
     const end: usize = length < 0 ? reader.end : reader.ptr + length;
@@ -73,6 +75,10 @@ export class MsgChannelOpenInitResponse {
     while (reader.ptr < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1:
+          message.channel_id = reader.string();
+          break;
+
         default:
           reader.skipType(tag & 7);
           break;
@@ -82,7 +88,11 @@ export class MsgChannelOpenInitResponse {
     return message;
   }
 
-  constructor() {}
+  channel_id: string;
+
+  constructor(channel_id: string = "") {
+    this.channel_id = channel_id;
+  }
 }
 
 export function decodeMsgChannelOpenInitResponse(a: Uint8Array): MsgChannelOpenInitResponse {
@@ -741,7 +751,10 @@ export function decodeMsgRecvPacket(a: Uint8Array): MsgRecvPacket {
 
 @unmanaged
 export class MsgRecvPacketResponse {
-  static encode(message: MsgRecvPacketResponse, writer: Writer): void {}
+  static encode(message: MsgRecvPacketResponse, writer: Writer): void {
+    writer.uint32(8);
+    writer.int32(message.result);
+  }
 
   static decode(reader: Reader, length: i32): MsgRecvPacketResponse {
     const end: usize = length < 0 ? reader.end : reader.ptr + length;
@@ -750,6 +763,10 @@ export class MsgRecvPacketResponse {
     while (reader.ptr < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1:
+          message.result = reader.int32();
+          break;
+
         default:
           reader.skipType(tag & 7);
           break;
@@ -759,7 +776,11 @@ export class MsgRecvPacketResponse {
     return message;
   }
 
-  constructor() {}
+  result: ResponseResultType;
+
+  constructor(result: ResponseResultType = 0) {
+    this.result = result;
+  }
 }
 
 export function decodeMsgRecvPacketResponse(a: Uint8Array): MsgRecvPacketResponse {
@@ -857,7 +878,10 @@ export function decodeMsgTimeout(a: Uint8Array): MsgTimeout {
 
 @unmanaged
 export class MsgTimeoutResponse {
-  static encode(message: MsgTimeoutResponse, writer: Writer): void {}
+  static encode(message: MsgTimeoutResponse, writer: Writer): void {
+    writer.uint32(8);
+    writer.int32(message.result);
+  }
 
   static decode(reader: Reader, length: i32): MsgTimeoutResponse {
     const end: usize = length < 0 ? reader.end : reader.ptr + length;
@@ -866,6 +890,10 @@ export class MsgTimeoutResponse {
     while (reader.ptr < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1:
+          message.result = reader.int32();
+          break;
+
         default:
           reader.skipType(tag & 7);
           break;
@@ -875,7 +903,11 @@ export class MsgTimeoutResponse {
     return message;
   }
 
-  constructor() {}
+  result: ResponseResultType;
+
+  constructor(result: ResponseResultType = 0) {
+    this.result = result;
+  }
 }
 
 export function decodeMsgTimeoutResponse(a: Uint8Array): MsgTimeoutResponse {
@@ -983,7 +1015,10 @@ export function decodeMsgTimeoutOnClose(a: Uint8Array): MsgTimeoutOnClose {
 
 @unmanaged
 export class MsgTimeoutOnCloseResponse {
-  static encode(message: MsgTimeoutOnCloseResponse, writer: Writer): void {}
+  static encode(message: MsgTimeoutOnCloseResponse, writer: Writer): void {
+    writer.uint32(8);
+    writer.int32(message.result);
+  }
 
   static decode(reader: Reader, length: i32): MsgTimeoutOnCloseResponse {
     const end: usize = length < 0 ? reader.end : reader.ptr + length;
@@ -992,6 +1027,10 @@ export class MsgTimeoutOnCloseResponse {
     while (reader.ptr < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1:
+          message.result = reader.int32();
+          break;
+
         default:
           reader.skipType(tag & 7);
           break;
@@ -1001,7 +1040,11 @@ export class MsgTimeoutOnCloseResponse {
     return message;
   }
 
-  constructor() {}
+  result: ResponseResultType;
+
+  constructor(result: ResponseResultType = 0) {
+    this.result = result;
+  }
 }
 
 export function decodeMsgTimeoutOnCloseResponse(a: Uint8Array): MsgTimeoutOnCloseResponse {
@@ -1099,7 +1142,10 @@ export function decodeMsgAcknowledgement(a: Uint8Array): MsgAcknowledgement {
 
 @unmanaged
 export class MsgAcknowledgementResponse {
-  static encode(message: MsgAcknowledgementResponse, writer: Writer): void {}
+  static encode(message: MsgAcknowledgementResponse, writer: Writer): void {
+    writer.uint32(8);
+    writer.int32(message.result);
+  }
 
   static decode(reader: Reader, length: i32): MsgAcknowledgementResponse {
     const end: usize = length < 0 ? reader.end : reader.ptr + length;
@@ -1108,6 +1154,10 @@ export class MsgAcknowledgementResponse {
     while (reader.ptr < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1:
+          message.result = reader.int32();
+          break;
+
         default:
           reader.skipType(tag & 7);
           break;
@@ -1117,9 +1167,19 @@ export class MsgAcknowledgementResponse {
     return message;
   }
 
-  constructor() {}
+  result: ResponseResultType;
+
+  constructor(result: ResponseResultType = 0) {
+    this.result = result;
+  }
 }
 
 export function decodeMsgAcknowledgementResponse(a: Uint8Array): MsgAcknowledgementResponse {
   return Protobuf.decode<MsgAcknowledgementResponse>(a, MsgAcknowledgementResponse.decode);
+}
+
+export enum ResponseResultType {
+  RESPONSE_RESULT_UNSPECIFIED = 0,
+  RESPONSE_RESULT_NOOP = 1,
+  RESPONSE_RESULT_SUCCESS = 2,
 }

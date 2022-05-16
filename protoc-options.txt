@@ -1,0 +1,4 @@
+--plugin=protoc-gen-as=./node_modules/as-proto-gen/packages/as-proto-gen/bin/as-proto-gen
+--proto_path=./cosmos-sdk/proto
+--proto_path=./cosmos-sdk/third_party/proto
+--proto_path=./ibc-go/proto

@@ -1,14 +1,16 @@
 {
-  "name": "@graphprotocol/cosmos-ts",
-  "version": "0.1.0-alpha.0",
+  "name": "@graphprotocol/cosmoshub-ts",
+  "version":"0.1.0-alpha.0",
   "license": "MIT",
   "module": "src/index.ts",
   "types": "src/index.ts",
   "main": "src/index.ts",
   "ascMain": "src/index.ts",
   "scripts": {
-    "prebuild": "cd ./node_modules/as-proto-gen && yarn build --scope as-proto-gen",
-    "build": "protoc --plugin=protoc-gen-as=./node_modules/as-proto-gen/packages/as-proto-gen/bin/as-proto-gen --proto_path=./third_party/ --as_out=./src $(./proto-file-list.sh)",
+    "prebuild": "cd ./node_modules/as-proto-gen/packages/as-proto-gen/ && yarn build",
+    "prebuild-ts": "sed -i -e 's[import \"proofs.proto\"[import \"confio/proofs.proto\"[' ibc-go/proto/ibc/core/commitment/v1/commitment.proto",
+    "build-ts": "protoc @protoc-options.txt --as_out=./src $(./protoc-file-list.sh)",
+    "build": "yarn build-ts",
     "test": "asc --explicitStart --exportRuntime --runtime stub src/index.ts --lib graph-cosmos-ts -b index.wasm"
   },
   "dependencies": {

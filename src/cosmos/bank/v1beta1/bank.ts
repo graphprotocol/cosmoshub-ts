@@ -320,6 +320,12 @@ export class Metadata {
 
     writer.uint32(34);
     writer.string(message.display);
+
+    writer.uint32(42);
+    writer.string(message.name);
+
+    writer.uint32(50);
+    writer.string(message.symbol);
   }
 
   static decode(reader: Reader, length: i32): Metadata {
@@ -345,6 +351,14 @@ export class Metadata {
           message.display = reader.string();
           break;
 
+        case 5:
+          message.name = reader.string();
+          break;
+
+        case 6:
+          message.symbol = reader.string();
+          break;
+
         default:
           reader.skipType(tag & 7);
           break;
@@ -358,12 +372,23 @@ export class Metadata {
   denom_units: Array<DenomUnit>;
   base: string;
   display: string;
+  name: string;
+  symbol: string;
 
-  constructor(description: string = "", denom_units: Array<DenomUnit> = [], base: string = "", display: string = "") {
+  constructor(
+    description: string = "",
+    denom_units: Array<DenomUnit> = [],
+    base: string = "",
+    display: string = "",
+    name: string = "",
+    symbol: string = ""
+  ) {
     this.description = description;
     this.denom_units = denom_units;
     this.base = base;
     this.display = display;
+    this.name = name;
+    this.symbol = symbol;
   }
 }
 

@@ -393,6 +393,44 @@ export function decodeVersion(a: Uint8Array): Version {
   return Protobuf.decode<Version>(a, Version.decode);
 }
 
+@unmanaged
+export class Params {
+  static encode(message: Params, writer: Writer): void {
+    writer.uint32(8);
+    writer.uint64(message.max_expected_time_per_block);
+  }
+
+  static decode(reader: Reader, length: i32): Params {
+    const end: usize = length < 0 ? reader.end : reader.ptr + length;
+    const message = new Params();
+
+    while (reader.ptr < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.max_expected_time_per_block = reader.uint64();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  }
+
+  max_expected_time_per_block: u64;
+
+  constructor(max_expected_time_per_block: u64 = 0) {
+    this.max_expected_time_per_block = max_expected_time_per_block;
+  }
+}
+
+export function decodeParams(a: Uint8Array): Params {
+  return Protobuf.decode<Params>(a, Params.decode);
+}
+
 export enum State {
   STATE_UNINITIALIZED_UNSPECIFIED = 0,
   STATE_INIT = 1,

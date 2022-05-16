@@ -1,5 +1,6 @@
 import { Writer, Reader, Protobuf } from "as-proto";
 import { google } from "../../../../google";
+import { cosmos } from "../../../../cosmos";
 
 export class IdentifiedClientState {
   static encode(message: IdentifiedClientState, writer: Writer): void {
@@ -168,15 +169,10 @@ export class ClientUpdateProposal {
     writer.string(message.description);
 
     writer.uint32(26);
-    writer.string(message.client_id);
+    writer.string(message.subject_client_id);
 
-    const header = message.header;
-    if (header !== null) {
-      writer.uint32(34);
-      writer.fork();
-      google.protobuf.Any.encode(header, writer);
-      writer.ldelim();
-    }
+    writer.uint32(34);
+    writer.string(message.substitute_client_id);
   }
 
   static decode(reader: Reader, length: i32): ClientUpdateProposal {
@@ -195,11 +191,11 @@ export class ClientUpdateProposal {
           break;
 
         case 3:
-          message.client_id = reader.string();
+          message.subject_client_id = reader.string();
           break;
 
         case 4:
-          message.header = google.protobuf.Any.decode(reader, reader.uint32());
+          message.substitute_client_id = reader.string();
           break;
 
         default:
@@ -213,19 +209,98 @@ export class ClientUpdateProposal {
 
   title: string;
   description: string;
-  client_id: string;
-  header: google.protobuf.Any | null;
+  subject_client_id: string;
+  substitute_client_id: string;
 
-  constructor(title: string = "", description: string = "", client_id: string = "", header: google.protobuf.Any | null = null) {
+  constructor(title: string = "", description: string = "", subject_client_id: string = "", substitute_client_id: string = "") {
     this.title = title;
     this.description = description;
-    this.client_id = client_id;
-    this.header = header;
+    this.subject_client_id = subject_client_id;
+    this.substitute_client_id = substitute_client_id;
   }
 }
 
 export function decodeClientUpdateProposal(a: Uint8Array): ClientUpdateProposal {
   return Protobuf.decode<ClientUpdateProposal>(a, ClientUpdateProposal.decode);
+}
+
+export class UpgradeProposal {
+  static encode(message: UpgradeProposal, writer: Writer): void {
+    writer.uint32(10);
+    writer.string(message.title);
+
+    writer.uint32(18);
+    writer.string(message.description);
+
+    const plan = message.plan;
+    if (plan !== null) {
+      writer.uint32(26);
+      writer.fork();
+      cosmos.upgrade.v1beta1.Plan.encode(plan, writer);
+      writer.ldelim();
+    }
+
+    const upgraded_client_state = message.upgraded_client_state;
+    if (upgraded_client_state !== null) {
+      writer.uint32(34);
+      writer.fork();
+      google.protobuf.Any.encode(upgraded_client_state, writer);
+      writer.ldelim();
+    }
+  }
+
+  static decode(reader: Reader, length: i32): UpgradeProposal {
+    const end: usize = length < 0 ? reader.end : reader.ptr + length;
+    const message = new UpgradeProposal();
+
+    while (reader.ptr < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.title = reader.string();
+          break;
+
+        case 2:
+          message.description = reader.string();
+          break;
+
+        case 3:
+          message.plan = cosmos.upgrade.v1beta1.Plan.decode(reader, reader.uint32());
+          break;
+
+        case 4:
+          message.upgraded_client_state = google.protobuf.Any.decode(reader, reader.uint32());
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  }
+
+  title: string;
+  description: string;
+  plan: cosmos.upgrade.v1beta1.Plan | null;
+  upgraded_client_state: google.protobuf.Any | null;
+
+  constructor(
+    title: string = "",
+    description: string = "",
+    plan: cosmos.upgrade.v1beta1.Plan | null = null,
+    upgraded_client_state: google.protobuf.Any | null = null
+  ) {
+    this.title = title;
+    this.description = description;
+    this.plan = plan;
+    this.upgraded_client_state = upgraded_client_state;
+  }
+}
+
+export function decodeUpgradeProposal(a: Uint8Array): UpgradeProposal {
+  return Protobuf.decode<UpgradeProposal>(a, UpgradeProposal.decode);
 }
 
 @unmanaged

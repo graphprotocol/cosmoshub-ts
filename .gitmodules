@@ -1,0 +1,14 @@
+[submodule "cosmos-sdk"]
+	path = cosmos-sdk
+	url = https://github.com/cosmos/cosmos-sdk.git
+	branch = v0.45.1
+	shallow = true
+	ignore = all
+
+[submodule "ibc-go"]
+	path = ibc-go
+	url = https://github.com/cosmos/ibc-go.git
+	branch = v3.0.0
+	shallow = true
+	ignore = all
+

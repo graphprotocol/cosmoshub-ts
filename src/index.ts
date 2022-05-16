@@ -1,5 +1,5 @@
-export * from "./confio";
 export * from "./cosmos";
+export * from "./confio";
 export * from "./google";
-export * from "./ibc";
 export * from "./tendermint";
+export * from "./ibc";
