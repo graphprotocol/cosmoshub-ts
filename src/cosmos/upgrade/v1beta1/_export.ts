@@ -2,7 +2,6 @@
 // versions:
 // 	 protoc-gen-as v0.3.0-alpha.2
 // 	 protoc        v3.20.1
-// source: tendermint/index.ts
+// source: cosmos/upgrade/v1beta1/_export.ts
 
-import * as tendermint from "./_export";
-export { tendermint };
+export * from "./upgrade";

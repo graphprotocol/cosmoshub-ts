@@ -1,6 +1,6 @@
 {
   "name": "@graphprotocol/cosmoshub-ts",
-  "version":"0.1.0-alpha.0",
+  "version": "0.1.0",
   "license": "MIT",
   "module": "src/index.ts",
   "types": "src/index.ts",
@@ -9,15 +9,16 @@
   "scripts": {
     "prebuild": "cd ./node_modules/as-proto-gen/packages/as-proto-gen/ && yarn build",
     "prebuild-ts": "sed -i -e 's[import \"proofs.proto\"[import \"confio/proofs.proto\"[' ibc-go/proto/ibc/core/commitment/v1/commitment.proto",
-    "build-ts": "protoc @protoc-options.txt --as_out=./src $(./protoc-file-list.sh)",
-    "build": "yarn build-ts",
-    "test": "asc --explicitStart --exportRuntime --runtime stub src/index.ts --lib graph-cosmos-ts -b index.wasm"
+    "build-ts": "protoc @protoc-options.txt $(./protoc-file-list.sh)",
+    "build": "rimraf src/* && yarn build-ts",
+    "test": "asc --explicitStart --exportRuntime --runtime stub src/index.ts --lib cosmoshub-ts -b index.wasm"
   },
   "dependencies": {
     "as-proto": "^0.2.3"
   },
   "devDependencies": {
-    "as-proto-gen": "https://github.com/figment-networks/as-proto.git#v0.3.0-alpha.0",
-    "assemblyscript": "^0.19.10"
+    "as-proto-gen": "https://github.com/figment-networks/as-proto.git#v0.3.0-alpha.2",
+    "assemblyscript": "^0.19.10",
+    "rimraf": "^3.0.2"
   }
 }

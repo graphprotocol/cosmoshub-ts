@@ -2,3 +2,5 @@
 --proto_path=./cosmos-sdk/proto
 --proto_path=./cosmos-sdk/third_party/proto
 --proto_path=./ibc-go/proto
+--as_out=./src
+--as_opt=gen-dependencies

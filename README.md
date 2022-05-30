@@ -1,4 +1,4 @@
-# graph-cosmos-ts
+# cosmoshub-ts
 
 This modules contains the typescript/assemblyscript binding for cosmos protobuf
 
