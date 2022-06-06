@@ -1,10 +1,10 @@
-name: Build
+name: Test
 
 on: push
 
 jobs:
   build:
-    name: Run Build
+    name: Run tests
     runs-on: ubuntu-latest
 
     steps:
@@ -12,9 +12,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - uses: arduino/setup-protoc@v1
       - run: git submodule update --init --force
       - run: yarn install --frozen-lockfile
-      - run: yarn build
-      - run: git diff
-      - run: git diff --quiet src/**.ts
+      - run: yarn test

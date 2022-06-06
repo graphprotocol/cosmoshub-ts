@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"as-proto-gen@https://github.com/figment-networks/as-proto.git#v0.3.0-alpha.2":
+"as-proto-gen@https://github.com/figment-networks/as-proto.git#v0.3.0-alpha.3":
   version "1.0.0"
-  resolved "https://github.com/figment-networks/as-proto.git#160bd7ee110e00c5254f6eea95100e0478e74435"
+  resolved "https://github.com/figment-networks/as-proto.git#d43336519dfc5ea5ad6911cbc60bf0864bc9b90a"
 
 as-proto@^0.2.3:
   version "0.2.3"
