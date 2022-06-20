@@ -11,7 +11,8 @@
     "prebuild-ts": "sed -i -e 's[import \"proofs.proto\"[import \"confio/proofs.proto\"[' ibc-go/proto/ibc/core/commitment/v1/commitment.proto",
     "build-ts": "protoc @protoc-options.txt $(./protoc-file-list.sh)",
     "build": "rimraf src/* && yarn build-ts",
-    "pretest": "asc --use abort= --debug --runtime stub test/cosmoshub.ts -b index.wasm",
+    "ascbuild": "asc --explicitStart --exportRuntime --runtime stub src/index.ts --lib cosmoshub-ts -b index.wasm",
+    "pretest": "yarn ascbuild && asc --use abort= --debug --runtime stub test/cosmoshub.ts -b index.wasm",
     "test": "node test/test.ts"
   },
   "dependencies": {
