@@ -11,14 +11,13 @@
     "prebuild-ts": "sed -i -e 's[import \"proofs.proto\"[import \"confio/proofs.proto\"[' ibc-go/proto/ibc/core/commitment/v1/commitment.proto",
     "build-ts": "protoc @protoc-options.txt $(./protoc-file-list.sh)",
     "build": "rimraf src/* && yarn build-ts",
-    "ascbuild": "asc --explicitStart --exportRuntime --runtime stub src/index.ts --lib cosmoshub-ts -b index.wasm",
-    "pretest": "yarn ascbuild && asc --use abort= --debug --runtime stub test/cosmoshub.ts -b index.wasm",
-    "test": "node test/test.ts"
+    "test": "asp --verbose"
   },
   "dependencies": {
     "as-proto": "^0.2.3"
   },
   "devDependencies": {
+    "@as-pect/cli": "^6.2.4",
     "as-proto-gen": "https://github.com/figment-networks/as-proto.git#v0.3.0-alpha.3",
     "assemblyscript": "^0.19.10",
     "rimraf": "^3.0.2"
