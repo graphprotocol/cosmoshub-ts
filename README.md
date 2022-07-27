@@ -17,7 +17,7 @@ function logDelegator(any: google.protobuf.Any) {
 
 ## Development
 
-Install [Protocol Buffer Compiler](https://github.com/protocolbuffers/protobuf/releases) (`protoc`).
+Install [Protocol Buffer Compiler](https://github.com/protocolbuffers/protobuf/releases) (`protoc`) and [Lerna](https://lerna.js.org/).
 
 ### Fetch dependencies
 
