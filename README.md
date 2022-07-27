@@ -10,7 +10,7 @@ import { cosmos, google } from "@graphprotocol/cosmoshub-ts";
 function logDelegator(any: google.protobuf.Any) {
   if (any.type_url == '/cosmos.staking.v1beta1.MsgDelegate') {
     const message = cosmos.staking.v1beta1.decodeMsgDelegate(any.value);
-    log.console(message.delegatorAddress)
+    log.console(message.delegatorAddress);
   }
 }
 ```
