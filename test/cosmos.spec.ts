@@ -1,8 +1,6 @@
 /// <reference types="@as-pect/assembly/types/as-pect" />
 
-import { Protobuf } from 'as-proto';
-
-import { Grant, decodeGrant } from '../src/cosmos/authz/v1beta1/authz';
+import { Grant, encodeGrant, decodeGrant } from '../src/cosmos/authz/v1beta1/authz';
 import { Any } from '../src/google/protobuf/any';
 import { Timestamp } from '../src/google/protobuf/timestamp';
 
@@ -13,12 +11,12 @@ describe('Cosmos SDK', () => {
       new Timestamp(123456, 654321)
     );
 
-    const encodedGrant = Protobuf.encode<Grant>(grant, Grant.encode);
+    const encodedGrant = encodeGrant(grant);
     const decodedGrant = decodeGrant(encodedGrant);
 
     const authorization = decodedGrant.authorization as Any;
 
-    expect(authorization.type_url).toBe('/this.is.a.test');
+    expect(authorization.typeUrl).toBe('/this.is.a.test');
     expect(authorization.value).toHaveLength(1024);
 
     const expiration = decodedGrant.expiration as Timestamp;

@@ -1,8 +1,6 @@
 /// <reference types="@as-pect/assembly/types/as-pect" />
 
-import { Protobuf } from 'as-proto';
-
-import { MsgTransfer, decodeMsgTransfer } from '../src/ibc/applications/transfer/v1/tx';
+import { MsgTransfer, encodeMsgTransfer, decodeMsgTransfer } from '../src/ibc/applications/transfer/v1/tx';
 import { Coin } from '../src/cosmos/base/v1beta1/coin';
 
 describe('IBC', () => {
@@ -17,11 +15,11 @@ describe('IBC', () => {
       67890,
     );
 
-    const encodedMsg = Protobuf.encode<MsgTransfer>(msg, MsgTransfer.encode);
+    const encodedMsg = encodeMsgTransfer(msg);
     const decodedMsg = decodeMsgTransfer(encodedMsg);
 
-    expect(decodedMsg.source_port).toBe('transfer');
-    expect(decodedMsg.source_channel).toBe('channel-141');
+    expect(decodedMsg.sourcePort).toBe('transfer');
+    expect(decodedMsg.sourceChannel).toBe('channel-141');
 
     const token = decodedMsg.token as Coin;
 
@@ -30,7 +28,7 @@ describe('IBC', () => {
 
     expect(decodedMsg.sender).toBe('cosmos1hjct6q7npsspsg3dgvzk3sdf89spmlpfg8wwf7');
     expect(decodedMsg.receiver).toBe('osmo1hjct6q7npsspsg3dgvzk3sdf89spmlpfqua7lv');
-    expect(decodedMsg.timeout_height).toBeNull();
-    expect(decodedMsg.timeout_timestamp).toBe(67890);
+    expect(decodedMsg.timeoutHeight).toBeNull();
+    expect(decodedMsg.timeoutTimestamp).toBe(67890);
   });
 });
