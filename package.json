@@ -11,7 +11,8 @@
     "prebuild-ts": "sed -i -e 's[import \"proofs.proto\"[import \"confio/proofs.proto\"[' ibc-go/proto/ibc/core/commitment/v1/commitment.proto",
     "build-ts": "protoc @protoc-options.txt $(./protoc-file-list.sh)",
     "build": "rimraf src/* && yarn build-ts",
-    "test": "asp --verbose"
+    "test": "asp --verbose",
+    "format": "prettier --write '**/*.ts'"
   },
   "dependencies": {
     "as-proto": "^0.2.3"
@@ -20,6 +21,7 @@
     "@as-pect/cli": "^6.2.4",
     "as-proto-gen": "https://github.com/figment-networks/as-proto.git#v0.5.0-alpha",
     "assemblyscript": "^0.19.10",
+    "prettier": "^2.7.1",
     "rimraf": "^3.0.2"
   }
 }
