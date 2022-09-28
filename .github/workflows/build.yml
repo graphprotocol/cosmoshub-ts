@@ -12,7 +12,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - uses: arduino/setup-protoc@v1
+      - uses: abelfodil/protoc-action@v1
+        with:
+          protoc-version: '21.6'
       - run: git submodule update --init --force
       - run: yarn install --frozen-lockfile
       - run: yarn build
