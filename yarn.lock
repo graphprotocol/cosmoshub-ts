@@ -105,9 +105,9 @@ ansi-styles@^4.0.0, ansi-styles@^4.1.0:
   dependencies:
     color-convert "^2.0.1"
 
-"as-proto-gen@https://github.com/figment-networks/as-proto.git#v0.3.0-alpha.3":
+"as-proto-gen@https://github.com/figment-networks/as-proto.git#v0.5.0-alpha":
   version "1.0.0"
-  resolved "https://github.com/figment-networks/as-proto.git#d43336519dfc5ea5ad6911cbc60bf0864bc9b90a"
+  resolved "https://github.com/figment-networks/as-proto.git#029d624d7669110af074c2e391d2fbc072ec04b5"
 
 as-proto@^0.2.3:
   version "0.2.3"
