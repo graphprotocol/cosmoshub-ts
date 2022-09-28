@@ -12,6 +12,7 @@
     "build-ts": "protoc @protoc-options.txt $(./protoc-file-list.sh)",
     "build": "rimraf src/* && yarn build-ts",
     "test": "asp --verbose",
+    "lint": "prettier --check '**/*.ts'",
     "format": "prettier --write '**/*.ts'"
   },
   "dependencies": {
